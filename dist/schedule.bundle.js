@@ -15,7 +15,7 @@
   \*********************************/
 /***/ ((module) => {
 
-eval("module.exports = createEl;\r\n\n\n//# sourceURL=webpack://food-festival/./assets/js/domMethods.js?");
+eval("function createEl(htmlString, attrs, ...children) {\r\n  if (typeof htmlString !== \"string\") {\r\n    throw Error(\"Argument 'htmlString' is required and must be a string\");\r\n  }\r\n\r\n  const el = document.createElement(htmlString);\r\n\r\n  if (typeof attrs === \"object\") {\r\n    for (let key in attrs) {\r\n      if (key.substring(0, 2) === \"on\") {\r\n        el.addEventListener(key.substring(2).toLowerCase(), attrs[key]);\r\n      } else if (key === \"style\") {\r\n        for (let rule in attrs[key]) {\r\n          el.style[rule] = attrs[key][rule];\r\n        }\r\n      } else {\r\n        el.setAttribute(key, attrs[key]);\r\n      }\r\n    }\r\n  }\r\n\r\n  children.forEach(function (child) {\r\n    let node;\r\n\r\n    if (child.constructor.name.includes(\"Element\")) {\r\n      node = child;\r\n    } else {\r\n      node = document.createTextNode(child);\r\n    }\r\n\r\n    el.appendChild(node);\r\n  });\r\n\r\n  return el;\r\n}\r\n\r\nmodule.exports = createEl;\r\n\n\n//# sourceURL=webpack://food-festival/./assets/js/domMethods.js?");
 
 /***/ }),
 
